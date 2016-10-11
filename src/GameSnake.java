@@ -63,6 +63,14 @@ public class GameSnake {
         frame.setVisible(true);
 
         snake = new Snake(START_SNAKE_X, START_SNAKE_Y, START_SNAKE_SIZE, START_DIRECTION);
+
+        while(!gameOver) {
+            snake.move();
+            canvasPanel.repaint();
+            try {
+                Thread.sleep(SHOW_DELAY);
+            } catch (InterruptedException e) {e.printStackTrace();}
+        }
     }
 
     class Snake {
@@ -75,6 +83,17 @@ public class GameSnake {
                 snake.add(point);
             }
             this.direction = direction;
+        }
+
+        void move() {
+            int x = snake.get(0).getX();
+            int y = snake.get(0).getY();
+            if (direction == LEFT) { x--; }
+            if (direction == RIGHT) { x++; }
+            if (direction == UP) { y--; }
+            if (direction == DOWN) { y++; }
+            snake.add(0, new Point(x, y));
+            snake.remove(snake.size() - 1);
         }
 
         void paint(Graphics g) {
@@ -101,6 +120,11 @@ public class GameSnake {
             this.x = x;
             this.y = y;
         }
+
+        public int getX() { return x; }
+
+        public int getY() { return y; }
+
     }
 
     public class Canvas extends JPanel {
