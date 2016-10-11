@@ -63,6 +63,20 @@ public class GameSnake {
         frame.setVisible(true);
     }
 
+    class Point {
+        int x, y;
+        Color color = DEFAULT_COLOR;
+
+        public Point(int x, int y) {
+            this.setXY(x, y);
+        }
+
+        void setXY(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
     public class Canvas extends JPanel {
 
         @Override
