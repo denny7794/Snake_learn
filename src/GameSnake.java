@@ -30,7 +30,7 @@ public class GameSnake {
     final Color DEFAULT_COLOR = Color.black;
     final Color FOOD_COLOR = Color.green;
     //final Color POISON_COLOR = Color.red;
-    //Snake snake;
+    Snake snake;
     //Food food;
     //Poison poison;
     JFrame frame;
@@ -61,6 +61,27 @@ public class GameSnake {
         });
 
         frame.setVisible(true);
+
+        snake = new Snake(START_SNAKE_X, START_SNAKE_Y, START_SNAKE_SIZE, START_DIRECTION);
+    }
+
+    class Snake {
+        ArrayList<Point> snake = new ArrayList<Point>();
+        int direction;
+
+        public Snake(int x, int y, int length, int direction) {
+            for (int i = 0; i < length; i++) {
+                Point point = new Point(x-i, y);
+                snake.add(point);
+            }
+            this.direction = direction;
+        }
+
+        void paint(Graphics g) {
+            for (Point point : snake) {
+                point.paint(g);
+            }
+        }
     }
 
     class Point {
@@ -69,6 +90,11 @@ public class GameSnake {
 
         public Point(int x, int y) {
             this.setXY(x, y);
+        }
+
+        void paint(Graphics g) {
+            g.setColor(color);
+            g.fillOval(x * POINT_RADIUS, y * POINT_RADIUS, POINT_RADIUS, POINT_RADIUS);
         }
 
         void setXY(int x, int y) {
@@ -82,6 +108,7 @@ public class GameSnake {
         @Override
         public void paint(Graphics g) {
             super.paint(g);
+            snake.paint(g);
         }
 
     }
