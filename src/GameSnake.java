@@ -29,9 +29,10 @@ public class GameSnake {
     final int START_DIRECTION = RIGHT;
     final Color DEFAULT_COLOR = Color.black;
     final Color FOOD_COLOR = Color.green;
-    final Color POISON_COLOR = Color.red;
-    Snake snake;
-    Food food;
+    //final Color POISON_COLOR = Color.red;
+    //Snake snake;
+    //Food food;
+    //Poison poison;
     JFrame frame;
     Canvas canvas;
     Random random = new Random();
@@ -42,6 +43,24 @@ public class GameSnake {
     }
 
     void go() {
+        frame = new JFrame(TITLE_OF_PROGRAM + " : " + START_SNAKE_SIZE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(FIELD_WIDTH * POINT_RADIUS + FIELD_DX, FIELD_HEIGHT * POINT_RADIUS + FIELD_DY);
+        frame.setLocation(START_LOCATION, START_LOCATION);
+        frame.setResizable(false);
+
+        canvasPanel = new Canvas();
+        canvasPanel.setBackground(Color.white);
+
+        frame.setVisible(true);
+    }
+
+    public class Canvas extends JPanel {
+
+        @Override
+        public void paint(Graphics g) {
+            super.paint(g);
+        }
 
     }
 }
