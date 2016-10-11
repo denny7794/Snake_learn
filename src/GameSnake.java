@@ -113,6 +113,9 @@ public class GameSnake {
             if (x < 0) { x = FIELD_WIDTH -1; }
             if (y > FIELD_HEIGHT - 1) { y = 0; }
             if (y < 0) { y = FIELD_HEIGHT -1; }
+            if (isInsideSnake(x, y)) {
+                gameOver = true;
+            }
             snake.add(0, new Point(x, y));
             if (isFood(food)) {
                 food.eat();
@@ -192,6 +195,9 @@ public class GameSnake {
             super.paint(g);
             snake.paint(g);
             food.paint(g);
+            if(gameOver) {
+                frame.setTitle(GAME_OVER_MSG);
+            }
         }
 
     }
