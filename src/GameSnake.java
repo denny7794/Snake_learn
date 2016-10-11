@@ -55,8 +55,8 @@ public class GameSnake {
         frame.getContentPane().add(BorderLayout.CENTER, canvasPanel);
         frame.addKeyListener(new KeyAdapter () {
             public void keyPressed(KeyEvent e) {
-                //snake.setDirection(e.getKeyCode());
-                System.out.println(e.getKeyCode()); // Отоброжает код нажатой клавиши
+                snake.setDirection(e.getKeyCode());
+                //System.out.println(e.getKeyCode()); // Отоброжает код нажатой клавиши
             }
         });
 
@@ -94,6 +94,12 @@ public class GameSnake {
             if (direction == DOWN) { y++; }
             snake.add(0, new Point(x, y));
             snake.remove(snake.size() - 1);
+        }
+
+        void setDirection(int direction) {
+            if ((direction >= LEFT) && (direction <= DOWN)) {
+                this.direction = direction;
+            }
         }
 
         void paint(Graphics g) {
