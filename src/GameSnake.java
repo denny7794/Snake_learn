@@ -75,6 +75,7 @@ public class GameSnake {
                 Thread.sleep(SHOW_DELAY);
             } catch (InterruptedException e) {e.printStackTrace();}
         }
+
     }
 
     class Snake {
@@ -127,7 +128,9 @@ public class GameSnake {
 
         void setDirection(int direction) {
             if ((direction >= LEFT) && (direction <= DOWN)) {
-                this.direction = direction;
+                if (Math.abs(this.direction - direction) != 2) {
+                    this.direction = direction;
+                }
             }
         }
 
