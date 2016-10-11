@@ -63,6 +63,7 @@ public class GameSnake {
         frame.setVisible(true);
 
         snake = new Snake(START_SNAKE_X, START_SNAKE_Y, START_SNAKE_SIZE, START_DIRECTION);
+        food = new Food();
 
         while(!gameOver) {
             snake.move();
