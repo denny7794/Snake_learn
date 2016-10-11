@@ -53,6 +53,12 @@ public class GameSnake {
         canvasPanel.setBackground(Color.white);
 
         frame.getContentPane().add(BorderLayout.CENTER, canvasPanel);
+        frame.addKeyListener(new KeyAdapter () {
+            public void keyPressed(KeyEvent e) {
+                //snake.setDirection(e.getKeyCode());
+                System.out.println(e.getKeyCode()); // Отоброжает код нажатой клавиши
+            }
+        });
 
         frame.setVisible(true);
     }
