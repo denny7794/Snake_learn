@@ -31,7 +31,7 @@ public class GameSnake {
     final Color FOOD_COLOR = Color.green;
     //final Color POISON_COLOR = Color.red;
     Snake snake;
-    //Food food;
+    Food food;
     //Poison poison;
     JFrame frame;
     Canvas canvasPanel;
@@ -66,6 +66,9 @@ public class GameSnake {
 
         while(!gameOver) {
             snake.move();
+            if (food.isEaten()) {
+                food.next();
+            }
             canvasPanel.repaint();
             try {
                 Thread.sleep(SHOW_DELAY);
@@ -85,6 +88,19 @@ public class GameSnake {
             this.direction = direction;
         }
 
+        boolean isInsideSnake(int x, int y) {
+            for (Point point : snake) {
+                if ((point.getX() == x) && (point.getY() == y)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        boolean isFood(Point food) {
+            return ((snake.get(0).getX() == food.getX()) && (snake.get(0).getY() == food.getY()));
+        }
+
         void move() {
             int x = snake.get(0).getX();
             int y = snake.get(0).getY();
@@ -97,7 +113,12 @@ public class GameSnake {
             if (y > FIELD_HEIGHT - 1) { y = 0; }
             if (y < 0) { y = FIELD_HEIGHT -1; }
             snake.add(0, new Point(x, y));
-            snake.remove(snake.size() - 1);
+            if (isFood(food)) {
+                food.eat();
+                frame.setTitle(TITLE_OF_PROGRAM + " : " + snake.size());
+            } else {
+                snake.remove(snake.size() - 1);
+            }
         }
 
         void setDirection(int direction) {
@@ -111,6 +132,32 @@ public class GameSnake {
                 point.paint(g);
             }
         }
+    }
+
+    class Food extends Point {
+
+        public Food() {
+            super(-1, -1);
+            this.color = FOOD_COLOR;
+        }
+
+        void eat() {
+            this.setXY(-1, -1);
+        }
+
+        boolean isEaten() {
+            return  this.getX() == -1;
+        }
+
+        void next() {
+            int x, y;
+            do {
+                x = random.nextInt(FIELD_WIDTH);
+                y = random.nextInt(FIELD_HEIGHT);
+            } while(snake.isInsideSnake(x, y));
+            this.setXY(x, y);
+        }
+
     }
 
     class Point {
@@ -143,6 +190,7 @@ public class GameSnake {
         public void paint(Graphics g) {
             super.paint(g);
             snake.paint(g);
+            food.paint(g);
         }
 
     }
