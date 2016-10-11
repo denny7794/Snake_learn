@@ -34,7 +34,7 @@ public class GameSnake {
     //Food food;
     //Poison poison;
     JFrame frame;
-    Canvas canvas;
+    Canvas canvasPanel;
     Random random = new Random();
     boolean gameOver = false;
 
@@ -51,6 +51,8 @@ public class GameSnake {
 
         canvasPanel = new Canvas();
         canvasPanel.setBackground(Color.white);
+
+        frame.getContentPane().add(BorderLayout.CENTER, canvasPanel);
 
         frame.setVisible(true);
     }
